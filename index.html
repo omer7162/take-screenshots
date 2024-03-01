@@ -46,8 +46,11 @@ CaptureScreenshot(MarkMouse) {
     Sleep, 1000 ; Wait a bit to ensure the screenshot is saved
     
     ; If marking the mouse, capture mouse position and mark it
-    If (MarkMouse) {
-        MouseGetPos, MouseX, MouseY
+	If (MarkMouse) {
+        WinGetPos, WinX, WinY, , , A  ; Get active window's top-left corner
+		MouseGetPos, MouseX, MouseY, , , 2  ; Get mouse position relative to the active window
+		MouseX := WinX + MouseX  ; Calculate absolute X
+		MouseY := WinY + MouseY  ; Calculate absolute Y
         ; This function will edit the image at FullPath to add an "X" at (MouseX, MouseY)
         MarkMouseLocation(FullPath, MouseX, MouseY)
     }
