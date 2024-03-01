@@ -47,7 +47,7 @@ CaptureScreenshot(MarkMouse) {
     
     ; If marking the mouse, capture mouse position and mark it
 	If (MarkMouse) {
-        WinGetPos, WinX, WinY, , , A  ; Get active window's top-left corner
+		WinGetPos, WinX, WinY, , , A  ; Get active window's top-left corner
 		MouseGetPos, MouseX, MouseY, , , 2  ; Get mouse position relative to the active window
 		MouseX := WinX + MouseX  ; Calculate absolute X
 		MouseY := WinY + MouseY  ; Calculate absolute Y
