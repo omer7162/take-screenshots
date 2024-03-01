@@ -61,7 +61,10 @@ CaptureScreenshot(MarkMouse) {
 
 	MarkMouseLocation(ImagePath, X, Y) {
 		; Define the path to the overlay image (red_x.png)
-		OverlayImagePath := ScreenshotBasePath . "\red_x.png"
+		OverlayImagePath := ScreenshotBasePath . "\\red_x.png"
+		
+		X := X - 47 ; Half the width of the overlay image
+		Y := Y - 45 ; Half the height of the overlay image
 
 		; Define the output image path
 		OutputImagePath := ScreenshotBasePath . ScreenshotIndex . "-Click.png"

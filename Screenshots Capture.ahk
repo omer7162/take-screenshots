@@ -1,4 +1,5 @@
-﻿#Persistent
+﻿; AutoHotkey Script for Screenshot Capturing
+#Persistent
 Global ScreenshotIndex := 0
 Global LastScreenshotNumber := 0
 Global ScreenshotBasePath := "C:\Users\omera\Desktop\Screenshots\"
@@ -41,30 +42,34 @@ CaptureScreenshot(MarkMouse) {
         MarkMouseLocation(FullPath, MouseX, MouseY)
     }
     Return
-}
+	}
 
-IncrementFilename() {
-    Global ScreenshotIndex
-    return ScreenshotIndex + 1
-}
+	IncrementFilename() {
+		Global ScreenshotIndex
+		return ScreenshotIndex + 1
+	}
 
-MarkMouseLocation(ImagePath, X, Y) {
-    ; Define the path to the overlay image (red_x.png)
-    OverlayImagePath := ScreenshotBasePath . "\red_x.png"
+	MarkMouseLocation(ImagePath, X, Y) {
+		; Define the path to the overlay image (red_x.png)
+		OverlayImagePath := ScreenshotBasePath . "\red_x.png"
+		
+		X := X - 47 ; Half the width of the overlay image
+		Y := Y - 45 ; Half the height of the overlay image
 
-    ; Define the output image path
-    OutputImagePath := ScreenshotBasePath . ScreenshotIndex . "-Click.png"
+		; Define the output image path
+		OutputImagePath := ScreenshotBasePath . ScreenshotIndex . "-Click.png"
 
-    ; FFmpeg command to overlay an image on top of another image
-    FFmpegCommand := "ffmpeg -y -i """ . ImagePath . """ -i """ . OverlayImagePath . """ -filter_complex """
-                    . "overlay=" . X . ":" . Y . """ """ . OutputImagePath . """"
+		; FFmpeg command to overlay an image on top of another image
+		FFmpegCommand := "ffmpeg -y -i """ . ImagePath . """ -i """ . OverlayImagePath . """ -filter_complex """
+						. "overlay=" . X . ":" . Y . """ """ . OutputImagePath . """"
 
-    ; Execute the FFmpeg command
-    Run, %ComSpec% /c %FFmpegCommand%, , Hide
-}
+		; Execute the FFmpeg command
+		Run, %ComSpec% /c %FFmpegCommand%, , Hide
+	}
 
 
-DeleteTempFiles(Directory) {
-    Loop, Files, % Directory "\*-Temp.*", F
-        FileDelete, %A_LoopFileFullPath%
-}
+	DeleteTempFiles(Directory) {
+		Loop, Files, % Directory "*-Temp.*", F
+			FileDelete, %A_LoopFileFullPath%
+	}
+	
