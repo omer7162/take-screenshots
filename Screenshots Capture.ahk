@@ -1,4 +1,8 @@
-﻿; AutoHotkey Script for Screenshot Capturing
+﻿WinGetPos, WinX, WinY, , , A  ; Get active window's top-left corner
+    MouseGetPos, MouseX, MouseY, , , 2  ; Get mouse position relative to the active window
+    AbsX := WinX + MouseX  ; Calculate absolute X
+    AbsY := WinY + MouseY  ; Calculate absolute Y
+    Tooltip, Absolute Position: X: %AbsX% Y: %AbsY%; AutoHotkey Script for Screenshot Capturing
 #Persistent
 Global ScreenshotIndex := 0
 Global LastScreenshotNumber := 0
@@ -37,7 +41,10 @@ CaptureScreenshot(MarkMouse) {
     
     ; If marking the mouse, capture mouse position and mark it
     If (MarkMouse) {
-        MouseGetPos, MouseX, MouseY
+        WinGetPos, WinX, WinY, , , A  ; Get active window's top-left corner
+		MouseGetPos, MouseX, MouseY, , , 2  ; Get mouse position relative to the active window
+		MouseX := WinX + MouseX  ; Calculate absolute X
+		MouseY := WinY + MouseY  ; Calculate absolute Y
         ; This function will edit the image at FullPath to add an "X" at (MouseX, MouseY)
         MarkMouseLocation(FullPath, MouseX, MouseY)
     }
