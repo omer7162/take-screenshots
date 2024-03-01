@@ -10,8 +10,8 @@ function updatePaths() {
     var nircmdPath = document.getElementById('nircmdPath').value;
     var scriptTemplate = `; AutoHotkey Script for Screenshot Capturing
 #Persistent
-Global ScreenshotIndex := 0
-Global LastScreenshotNumber := 0
+Global ScreenshotIndex := -1
+Global LastScreenshotNumber := -1
 Global ScreenshotBasePath := "${screenshotPath}\\"
 Global NirCmdPath := "${nircmdPath}"
 

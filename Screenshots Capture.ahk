@@ -1,11 +1,5 @@
-﻿WinGetPos, WinX, WinY, , , A  ; Get active window's top-left corner
-    MouseGetPos, MouseX, MouseY, , , 2  ; Get mouse position relative to the active window
-    AbsX := WinX + MouseX  ; Calculate absolute X
-    AbsY := WinY + MouseY  ; Calculate absolute Y
-    Tooltip, Absolute Position: X: %AbsX% Y: %AbsY%; AutoHotkey Script for Screenshot Capturing
-#Persistent
-Global ScreenshotIndex := 0
-Global LastScreenshotNumber := 0
+﻿Global ScreenshotIndex := -1
+Global LastScreenshotNumber := -1
 Global ScreenshotBasePath := "C:\Users\omera\Desktop\Screenshots\"
 Global NirCmdPath := "C:\Windows\nircmd\nircmd.exe"
 
